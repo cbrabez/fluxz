@@ -5,25 +5,30 @@
     <title>Feed Dashboard</title>
 </head>
 <body>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <% content.forEach(function(feed){ %>    
-        <li class="page-item"><a class="page-link" href="#"><%= feed.title %></a></li>
-        <% }) %>
-      </ul>
-    </nav>
-
 <!-- looping every post in one feed-->
-    <% content[0].items.forEach(function(feeditem){ %>
-    <ul>
-    <h3><%= JSON.stringify(feeditem.title) %></h3>
-    <p><%= JSON.stringify(feeditem.contentSnippet) %></p>
-    </ul>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <% content.forEach(function(feed, index){ %>
+    <a class="nav-item nav-link" id="nav-<%= index %>-tab" data-toggle="tab" href="#nav-<%= index %>" role="tab" aria-controls="nav-<%= index %>" aria-selected="false"><%= feed.title %></a>
     <% }) %>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+    
+    <% for (var i = 0, len = content.length; i < len; i++) { %>
+      <div class="tab-pane fade" id="nav-<%= i %>" role="tabpanel" aria-labelledby="nav-<%= i %>-tab"><h3><%= JSON.stringify(content[i].items) %></h3></div>
+
+    <% } %>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+$( "#nav-0" ).addClass( "show active" );
+</script>
+
 </body>
 
 </html>
