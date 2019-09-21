@@ -16,8 +16,13 @@
 
 <div class="tab-content" id="nav-tabContent">
     
-    <% for (var i = 0, len = content.length; i < len; i++) { %>
-      <div class="tab-pane fade" id="nav-<%= i %>" role="tabpanel" aria-labelledby="nav-<%= i %>-tab"><h3><%= JSON.stringify(content[i].items) %></h3></div>
+    <% for (var feedCounter = 0, len = content.length; feedCounter < len; feedCounter++) { %>
+      <div class="tab-pane fade" id="nav-<%= feedCounter %>" role="tabpanel" aria-labelledby="nav-<%= feedCounter %>-tab">
+        <% content[feedCounter].items.forEach(function(post, index){ %>
+          <h4><%= post.title %></h4>
+          <p><%= post.contentSnippet %></p>
+        <% }) %>
+      </div>
 
     <% } %>
 </div>
@@ -27,6 +32,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
 $( "#nav-0" ).addClass( "show active" );
+$( "#nav-0-tab" ).addClass( "active" );
 </script>
 
 </body>
