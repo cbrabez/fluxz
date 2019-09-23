@@ -8,7 +8,7 @@
 <!-- looping every post in one feed-->
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <% content.forEach(function(feed, index){ %>
+    <% feedlist.forEach(function(feed, index){ %>
     <a class="nav-item nav-link" id="nav-<%= index %>-tab" data-toggle="tab" href="#nav-<%= index %>" role="tab" aria-controls="nav-<%= index %>" aria-selected="false"><%= feed.title %></a>
     <% }) %>
   </div>

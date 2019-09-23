@@ -22,22 +22,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 
-const FEED_LIST = [
-  'https://css-tricks.com/feed/',
-  //'https://codepen.io/posts/feed',
-  'https://blog.safia.rocks/rss',
-  'https://hnrss.org/frontpage',
-  'https://tj.ie/feed.rss'
-];
+let rawfeeds = fs.readFileSync('feed-list.json');
+feedlist = JSON.parse(rawfeeds);
 
 FEED_CONTENT = [];
 let currentFeed;
 
 cron.schedule("* * * * *", function(){
   FEED_CONTENT = [];
-  FEED_LIST.forEach(function(feed){
+  feedlist.forEach(function(feed){
   (async () => {
-    try{currentFeed = await parser.parseURL(feed);
+    try{currentFeed = await parser.parseURL(feed.url);
     }
     catch(e) {
       console.error(e.message); // "oh, no!"
@@ -50,7 +45,7 @@ cron.schedule("* * * * *", function(){
     console.log(FEED_CONTENT);
   });
 
-  module.exports = app, FEED_CONTENT;
+  module.exports = app;
 
 
 
