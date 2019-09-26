@@ -1,4 +1,5 @@
 const express = require('express');
+var bodyParser = require("body-parser");
 const Parser = require('rss-parser');
 var path = require("path");
 let parser = new Parser();
@@ -8,13 +9,16 @@ const fs = require("fs");
 const cron = require("node-cron");
 
 let app = express();
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // ROUTING
 let router = express.Router();
 var indexRoutes   = require("./routes/index"),
     feedRoutes    = require("./routes/feed");
 app.use("/", indexRoutes);
 app.use("/feed", feedRoutes);
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
